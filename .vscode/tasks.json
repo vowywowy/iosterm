@@ -1,0 +1,13 @@
+{
+	// See https://go.microsoft.com/fwlink/?LinkId=733558
+	// for the documentation about the tasks.json format
+	"version": "0.1.0",
+	"taskName": "compile",
+	"command": "electron",
+	"args": [
+		"${workspaceRoot}\\client\\index.js"
+	],
+	"isShellCommand": true,
+	"isBackground": false,
+	"showOutput": "silent"
+}

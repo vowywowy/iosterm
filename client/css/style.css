@@ -1,0 +1,98 @@
+:root{
+	--background-color:
+}
+
+*{
+	box-sizing: border-box;
+}
+
+body,
+html{
+	margin: 0;
+}
+
+body{
+	background: #333;
+}
+
+#container{
+	height: 100%;
+	width: 100%;
+}
+
+#terminal {
+	position: fixed;
+	width: 0;
+	height: 0;
+	top: 0;
+	outline: none;
+	opacity: 0;
+}
+
+.display {
+	font: 14px 'Roboto Mono';
+	outline: none;
+	margin: 0;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+	position: relative;
+	color: #cdd3de;
+	display: inline;
+}
+
+#show:after{
+	content: '';
+	position: absolute;
+	display: inline-block;
+	background: #ffcc00;
+	height: 20px;
+	width: 8px;
+	animation: blink 1000ms step-end infinite;
+	z-index: 1;
+	pointer-events: none;
+}
+
+.space:before{
+	content: ' ';
+	font-size: 0;
+	pointer-events: none;
+}
+
+.fadeout:after{
+	content: 'Selection copied';
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 20px;
+	background: rgba(255,255,255,0.3);
+	text-align: center;
+	pointer-events: none;
+	border-radius: 2px;
+	width: max-content;
+	font: 32px 'Roboto';
+	color: rgba(0,0,0,0.7);
+	opacity: 0;
+}
+
+.fadeout:after{
+	animation: fadeout 1200ms ease-in;
+}
+
+@keyframes blink{
+	0%, 100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+}
+
+@keyframes fadeout{
+	0%{
+		opacity: 1;
+	}
+	100%{
+		opacity: 0;
+	}
+}
