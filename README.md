@@ -4,7 +4,6 @@
 ## Without test server (recommended)
 3. Change IP address to desired telnet target in `client/js/client.js`
 4. `cd` to client folder and type `electron` **(If you have vscode, just open the repo  and press `crtl+shift+b`)**
----
 ## With test server (not recommended)
 3. Change IP address to `127.0.0.1` in `client/js/client.js`
 4. `cd` to client folder and run `electron` **(If you have vscode, just open the repo  and press `crtl+shift+b`)**
