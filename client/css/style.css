@@ -13,11 +13,7 @@ html{
 
 body{
 	background: #333;
-}
-
-#container{
-	height: 100%;
-	width: 100%;
+	padding-top: 20px;
 }
 
 #terminal {

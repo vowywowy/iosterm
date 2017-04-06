@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	//client
 	const net = require('net');
 	const fs = require('fs');
-	const {clipboard} = require('electron');
+	const { clipboard } = require('electron');
 	const config = {
 		//required
 		port: 23,
@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		lookup: dns.lookup
 		*/
 	};
+	document.title += `@${config.host}${config.port == 23 ? '' : ':' + config.port}`;
 	let client = net.createConnection(config, () => {
 		client.on('error', (er) => {
 			console.log(er);
@@ -24,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}).on('error', (er) => {
 		console.log(er);
 	});
+
 
 	fs.readFile('client/res/characters.json', (e, d) => {
 		//throw any file error
@@ -77,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 							: overwrite.classList.remove('space');
 						break;
 					default:
-						if(overwrite.textContent.length){
+						if (overwrite.textContent.length) {
 							overwrite.textContent = overwrite.textContent.slice(1);
 							overwrite.textContent.charCodeAt(0) == 32
 								? overwrite.classList.add('space')
@@ -91,8 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 
 		//auto copy
-		document.addEventListener('mouseup',(e)=>{
-			if(e.which == 1){ //lmb
+		document.addEventListener('mouseup', (e) => {
+			if (e.which == 1) { //lmb
 				const sel = (document.all)
 					? document.createRange().text
 					: document.getSelection();
@@ -109,12 +111,10 @@ document.addEventListener('DOMContentLoaded', () => {
 						container.classList.add('fadeout')
 					) : container.classList.add('fadeout');
 				}
-			} else if (e.which == 3){ //rmb
+			} else if (e.which == 3) { //rmb
 				client.write(Buffer(clipboard.readText()));
 				terminal.focus();
 			}
 		});
 	});
 });
-
-
