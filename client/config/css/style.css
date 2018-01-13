@@ -1,0 +1,174 @@
+body{
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	-webkit-app-region: drag;
+}
+
+#config{
+	display: flex;
+	flex-flow: column;
+	margin: 0;
+	max-width: 600px;
+	width: 100%;
+	padding: 8px;
+}
+
+* + .option,
+button{
+	margin-top: 8px;
+}
+
+.option{
+	color: var(--foreground-color);
+	display: flex;
+	flex-flow: column;
+	position: relative;
+	width: 100%;
+	font-size: 14px;
+}
+
+.title{
+	display: block;
+	font-size: 14px;
+	border-bottom: solid 2px var(--accent-color);
+	color: var(--accent-color);
+	margin-bottom: 8px;
+	cursor: default;
+}
+
+input{
+	background: none;
+	border: solid 2px var(--foreground-color);
+	outline: none;
+	padding: 4px;
+	color: var(--foreground-color);
+	font-size: 14px;
+}
+
+.default{
+	opacity: 0.7;
+	align-self: flex-end;
+	font-size: 14px;
+}
+
+.default:before{
+	content: 'Default: ';
+}
+
+.help{
+	position: absolute;
+	top: 0;
+	margin-top: 19px;
+	opacity: 0;
+	pointer-events: none;
+	background: var(--foreground-color);
+	color: var(--background-color);
+	padding: 8px;
+	transition: linear 0.2s;
+	transition-delay: 0;
+}
+
+.title:hover ~ .help{
+	opacity: 1;
+	transition: linear 0;
+	transition-delay: 0.5s;
+	z-index: 1;
+}
+
+.radios{
+	font-size: 14px;
+}
+
+input[type=radio],
+input[type=checkbox]{
+	display: none;
+}
+
+input[type=radio] + label{
+	margin-right: 8px;
+	cursor: pointer;
+}
+
+input[type=radio]:checked + label{
+	color: var(--accent-color);
+}
+
+input[type=radio] + label:after{
+	content: '';
+	display: inline-block;
+	height: 12px;
+	width: 12px;
+	background: none;
+	border: solid 2px var(--foreground-color);
+	border-radius: 50%;
+	vertical-align: -2px;
+	margin-left: 8px;
+}
+
+input[type=radio]:checked + label:after{
+	background: var(--accent-color);
+}
+
+.option:last-of-type{
+	display: block;
+}
+
+input[type=checkbox] + label{
+	background: var(--foreground-color);
+	position: relative;
+	padding: 6px 26px 6px 2px;
+	cursor: pointer;
+}
+input[type=checkbox] + label:before{
+	content: 'Enable';
+	background: var(--background-color);
+	padding: 4px;
+	display: inline-block;
+}
+
+input[type=checkbox] + label:after{
+	content: '';
+	display: inline-block;
+	position: absolute;
+	width: 12px;
+	height: 4px;
+	border-bottom: solid 4px var(--background-color);
+	border-left: solid 4px var(--background-color);
+	transform: translate(-30%, -50%) rotate(-45deg);
+	top: 40%;
+	right: 0;
+	opacity: 0.2;
+}
+
+input[type=checkbox]:checked + label:after{
+	opacity: 1;
+}
+
+input[type=checkbox]:checked + label:before{
+	content: 'Enabled';
+	color: var(--accent-color);
+}
+
+input[type=checkbox]:checked + label{
+	background: var(--accent-color);
+}
+
+button{
+	font-size: 14px;
+	font-weight: bold;
+	border: none;
+	background: var(--accent-color);
+	color: var(--background-color);
+	padding: 16px;
+	cursor: pointer;
+	width: max-content;
+	align-self: flex-end;
+}
+
+input,
+button,
+label,
+.title{
+	-webkit-app-region: no-drag;
+}

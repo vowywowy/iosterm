@@ -1,0 +1,64 @@
+<head>
+	<title>iosterm - New Connection</title>
+	<script src="js/ipcConfig.js"></script>
+	<link rel="stylesheet" href="../common/css/base.css">
+	<link rel="stylesheet" href="css/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<form id="config">
+	
+	<div class="option">
+		<span class="title">Host</span>
+		<input name="host" id="host" placeholder="localhost">
+		<div class="default">localhost</div>
+		<div class="help">
+			The host you want to connect to. This can be either an IP adress or a hostname.
+		</div>
+	</div>
+	<div class="option">
+		<span class="title">Port</span>
+		<input name="port" type="number" min="1" max="65535" id="port" placeholder="23">
+		<div class="default">23</div>
+		<div class="help">
+			The port the host is listening on. A value between 1 and 65535.
+		</div>
+	</div>
+	<div class="option">
+		<span class="title">Address Family</span>
+		<div class="radios">
+			<input name="family" type="radio" id="r4" value="4" checked="checked">
+			<label for="r4">IPv4</label>
+			<input name="family" id="r6" type="radio" value="6">
+			<label for="r6">IPv6</label>
+		</div>
+		<div class="help">
+			The IP address family of the connection.
+		</div>
+	</div>
+	<div class="option">
+		<span class="title">Source Address</span>
+		<input value="" name="localAddress" id="localAddress">
+		<div class="default">Unused</div>
+		<div class="help">
+			The source address of your connection. This needs to be an address on your device.
+		</div>
+	</div>
+	<div class="option">
+		<span class="title">Source Port</span>
+		<input value="" name="localPort" id="localPort">
+		<div class="default">Unused</div>
+		<div class="help">
+			The source port of your connection.
+		</div>
+	</div>
+	<div class="option">
+		<span class="title">DNS Hints</span>
+		<input value="dns.V4MAPPED" name="hints" type="checkbox" id="hints">
+		<label for="hints"></label>
+		<div class="help">
+			Check this if the host is IPv6, requires a DNS lookup, and you are using an IPv4 address mapped to an IPv6 address.
+		</div>
+	</div>
+	<button>Save & Connect</button>
+</form>

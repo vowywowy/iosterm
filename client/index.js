@@ -1,7 +1,14 @@
 'use strict';
 //electron
 const electron = require('electron');
-const { app, BrowserWindow, Menu } = electron;
+const {
+	app,
+	BrowserWindow,
+	Menu,
+	globalShortcut,
+	ipcMain
+} = electron;
+
 const path = require('path');
 const url = require('url');
 const fs = require('fs');
@@ -22,7 +29,7 @@ let win = null;
 			});
 
 			win.loadURL(url.format({
-				pathname: path.join(__dirname, 'index.html'),
+				pathname: path.join(__dirname, 'terminal/terminal.html'),
 				protocol: 'file:',
 				slashes: true
 			}));
@@ -56,17 +63,42 @@ app.commandLine.appendSwitch('--enable-overlay-scrollbar');
 //menus
 const template = [
 	{
-		label: 'Connect',
+		label: 'Connection',
 		submenu: [
-			{ label: 'New Connection', accelerator: 'CmdOrCtrl+Shift+N' },
-			{ label: 'Stop Connection', accelerator: 'CmdOrCtrl+Shift+~' },
+			{
+				label: 'New Connection', click: () => {
+					let child = new BrowserWindow({ 
+						parent: win, 
+						modal: true, 
+						show: false,
+						width: 318, 
+						height: 505,
+						//frame: false,
+						//resizable: false,
+					});
+					child.loadURL(url.format({
+						pathname: path.join(__dirname, 'config/config.html'),
+						protocol: 'file:',
+						slashes: true
+					}));
+					child.once('ready-to-show', () => {
+						child.show();
+					});
+				}
+			},
+			{ label: 'Reset Connection' },
+			{ label: 'Stop Connection' },
 			{ type: 'separator' },
-			{ label: 'Saved Connections', submenu:[
-				{ label: 'Saved connections go here...'}
-			]},
-			{ label: 'Edit Saved Connections', submenu: [
-				{ label: 'Saved connections go here...' }
-			]}
+			{
+				label: 'Saved Connections', submenu: [
+					{ label: 'Saved connections go here...' }
+				]
+			},
+			{
+				label: 'Edit Saved Connections', submenu: [
+					{ label: 'Saved connections go here...' }
+				]
+			}
 		]
 	},
 	{
@@ -151,8 +183,19 @@ if (process.platform === 'darwin') {
 		{ type: 'separator' },
 		{ role: 'front' }
 	]
-}
+};
 
-const menu = Menu.buildFromTemplate(template)
-Menu.setApplicationMenu(menu)
+const menu = Menu.buildFromTemplate(template);
+Menu.setApplicationMenu(menu);
+
+//ipc
+let terminal;
+ipcMain.on('ready', (ev, arg) => {
+	terminal = ev.sender;
+});
+ipcMain.on('config',(ev,config) => {
+	terminal
+		? terminal.send('config', config)
+		: ev.sender.send('error', 'Terminal process not ready');
+});
 //end of electron
